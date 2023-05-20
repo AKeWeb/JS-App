@@ -1,18 +1,18 @@
 // Creating Pokemon Objects:
-let pokemon1 = {
-  name: Butterfree,
+let pokomonA = {
+  name: "Butterfree",
   height: 5,
   type: [poision, grass],
 };
 
 let pokemon2 = {
-  name: Weedle,
+  name: "Weedle",
   height: 3,
   type: [rock, fire],
 };
 
 let pokemon3 = {
-  name: Rattata,
+  name: "Rattata",
   height: 3,
   type: [ice, water],
 };
