@@ -20,3 +20,4 @@ let pokemon3 = {
 
 // Including Pokemon Objects into Pokemon List (Array):
 let pokemonList = [pokemon1, pokemon2, pokemon3];
+console.log(pokemonList);
