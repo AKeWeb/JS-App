@@ -26,18 +26,21 @@ console.log(pokemonList);
 for (let i = 0; i < pokemonList.length; i++) {
   if (pokemonList[i].height > 4) {
     document.write(
-      `${pokemonList[i].name} (height: ${pokemonList[i].height}), ...wow, that is a big one!`
+      `<p> ${pokemonList[i].name} (height: ${pokemonList[i].height}), ...wow, that
+        is a big one! </p>`
     );
   } else if (pokemonList[i].height < 4 && pokemonList[i].height > 2) {
     document.write(
-      pokemonList[i].name +
+      "<p>" +
+        pokemonList[i].name +
         " (height: " +
         pokemonList[i].height +
-        "), that is a medium sized one."
+        "), that is the medium sized one." +
+        "</p>"
     );
   } else {
     document.write(
-      `${pokemonList[i].name} (height: ${pokemonList[i].height}), that is the smallest one!`
+      `<p> ${pokemonList[i].name} (height: ${pokemonList[i].height}), that is the smallest one! </p>`
     );
   }
 }
