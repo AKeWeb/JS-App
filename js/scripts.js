@@ -1,46 +1,56 @@
-// Creating Pokemon Objects:
+//IIFE Function:
+let pokemonRepository = (function () {
+  // Creating Pokemon Objects:
+  let pokemon1 = {
+    name: "Butterfree",
+    height: 5,
+    type: ["poision", "grass"],
+  };
 
-let pokemon1 = {
-  name: "Butterfree",
-  height: 5,
-  type: ["poision", "grass"],
-};
+  let pokemon2 = {
+    name: "Weedle",
+    height: 3,
+    type: ["rock", "fire"],
+  };
 
-let pokemon2 = {
-  name: "Weedle",
-  height: 1,
-  type: ["rock", "fire"],
-};
+  let pokemon3 = {
+    name: "Rattata",
+    height: 1,
+    type: ["ice", "water"],
+  };
 
-let pokemon3 = {
-  name: "Rattata",
-  height: 3,
-  type: ["ice", "water"],
-};
+  // Including Pokemon Objects into Pokemon List (Array):
+  let pokemonList = [pokemon1, pokemon2, pokemon3];
+  console.log(pokemonList);
 
-// Including Pokemon Objects into Pokemon List (Array):
-let pokemonList = [pokemon1, pokemon2, pokemon3];
-console.log(pokemonList);
+  //Function to push (add) new pokemon the pokemonList
+  function add(pokemon) {
+    pokemonList.push(pokemon);
+  }
 
-//for loop, whith 2 diferent concepts to write the result - Concatenating Strings & Template literal
-for (let i = 0; i < pokemonList.length; i++) {
-  if (pokemonList[i].height > 4) {
+  //Function to access pokemonList
+  function getAll() {
+    return pokemonList;
+  }
+
+  //Results accessble from outside the function
+  return {
+    add: add,
+    getAll: getAll,
+  };
+})();
+
+// forEach loop: To access the pokemonList one has to use the getAll() function:
+pokemonRepository.getAll().forEach(function (pokemon) {
+  if (pokemon.height > 4) {
     document.write(
-      `<p> ${pokemonList[i].name} (height: ${pokemonList[i].height}), ...wow, that
-        is a big one! </p>`
+      `<p>${pokemon.name} (height: ${pokemon.height}), ...wow that is a big one!`
     );
-  } else if (pokemonList[i].height < 4 && pokemonList[i].height > 2) {
-    document.write(
-      "<p>" +
-        pokemonList[i].name +
-        " (height: " +
-        pokemonList[i].height +
-        "), that is the medium sized one." +
-        "</p>"
-    );
+  } else if (pokemon.height < 4 && pokemon.height > 2) {
+    document.write(`<p>${pokemon.name} (height: ${pokemon.height})`);
   } else {
     document.write(
-      `<p> ${pokemonList[i].name} (height: ${pokemonList[i].height}), that is the smallest one! </p>`
+      `<p>${pokemon.name} (height: ${pokemon.height}), that is the smallest one!`
     );
   }
-}
+});
