@@ -23,9 +23,18 @@ let pokemonRepository = (function () {
   let pokemonList = [pokemon1, pokemon2, pokemon3];
   console.log(pokemonList);
 
-  //Function to push (add) new pokemon the pokemonList
+  //Function to push (add) new pokemon the pokemonList, making sure it is an objective and has a name, height and type key:
   function add(pokemon) {
-    pokemonList.push(pokemon);
+    if (
+      typeof pokemon === "object" &&
+      "name" in pokemon &&
+      "height" in pokemon &&
+      "type" in pokemon
+    ) {
+      pokemonList.push(pokemon);
+    } else {
+      console.log("Invalid Pokémon");
+    }
   }
 
   //Function to access pokemonList
@@ -54,3 +63,11 @@ pokemonRepository.getAll().forEach(function (pokemon) {
     );
   }
 });
+
+//Filter based on the length of the pokemon name
+
+const result = pokemonRepository
+  .getAll()
+  .filter((pokemon) => pokemon.name.length < 7);
+
+console.log(result);
