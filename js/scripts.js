@@ -31,7 +31,12 @@ let pokemonRepository = (function () {
       "height" in pokemon &&
       "type" in pokemon
     ) {
-      pokemonList.push(pokemon);
+      let newPokemon = {
+        name: pokemon.name,
+        height: pokemon.height,
+        type: pokemon.type,
+      };
+      pokemonList.push(newPokemon);
     } else {
       console.log("Invalid Pokémon");
     }
@@ -64,10 +69,19 @@ pokemonRepository.getAll().forEach(function (pokemon) {
   }
 });
 
+//Add a pokemon:
+pokemonRepository.add({
+  name: "Ekans",
+  height: 1,
+  type: ["ice", "water"],
+});
+console.log("Updated repository", pokemonRepository.getAll());
+//"Updated repository" gives a name in the console to the new Array.
+
 //Filter based on the length of the pokemon name
 
 const result = pokemonRepository
   .getAll()
-  .filter((pokemon) => pokemon.name.length < 7);
+  .filter((pokemon) => pokemon.name.length >= 7);
 
 console.log(result);
