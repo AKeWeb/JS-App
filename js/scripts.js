@@ -23,7 +23,7 @@ let pokemonRepository = (function () {
   let pokemonList = [pokemon1, pokemon2, pokemon3];
   console.log(pokemonList);
 
-  //Function to push (add) new pokemon the pokemonList, making sure it is an objective and has a name, height and type key:
+  //Function to push (add) new pokemon the pokemonList, making sure it is an objective and has a name, height and type key and the right "structure" through a new varible let newPokemon:
   function add(pokemon) {
     if (
       typeof pokemon === "object" &&
@@ -54,7 +54,7 @@ let pokemonRepository = (function () {
   };
 })();
 
-// forEach loop: To access the pokemonList one has to use the getAll() function:
+// forEach loop: To access the pokemonList one has to use the getAll() function (return):
 pokemonRepository.getAll().forEach(function (pokemon) {
   if (pokemon.height > 4) {
     document.write(
@@ -78,7 +78,7 @@ pokemonRepository.add({
 console.log("Updated repository", pokemonRepository.getAll());
 //"Updated repository" gives a name in the console to the new Array.
 
-//Filter based on the length of the pokemon name
+//Filter with Arrow function based on the length of the pokemon name
 
 const result = pokemonRepository
   .getAll()
