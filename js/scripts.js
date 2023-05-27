@@ -59,7 +59,7 @@ let pokemonRepository = (function () {
     pokemonList.appendChild(listItem);
     //This function is called an event handler.
     button.addEventListener("click", function (pokemon) {
-      console.log(pokemon);
+      console.log(button.innerText);
     });
   }
 
