@@ -47,27 +47,33 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+  //Function to add Pokemons with DOM
+  function addListItem(pokemon) {
+    let pokemonList = document.querySelector(".pokemon-list");
+    let listItem = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("pokemonButton");
+    listItem.classList.add("listItem");
+    listItem.appendChild(button);
+    pokemonList.appendChild(listItem);
+    //This function is called an event handler.
+    button.addEventListener("click", function (pokemon) {
+      console.log(pokemon);
+    });
+  }
+
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+
   //Results accessble from outside the function
   return {
     add: add,
     getAll: getAll,
+    addListItem: addListItem,
   };
 })();
-
-// forEach loop: To access the pokemonList one has to use the getAll() function:
-pokemonRepository.getAll().forEach(function (pokemon) {
-  if (pokemon.height > 4) {
-    document.write(
-      `<p>${pokemon.name} (height: ${pokemon.height}), ...wow that is a big one!`
-    );
-  } else if (pokemon.height < 4 && pokemon.height > 2) {
-    document.write(`<p>${pokemon.name} (height: ${pokemon.height})`);
-  } else {
-    document.write(
-      `<p>${pokemon.name} (height: ${pokemon.height}), that is the smallest one!`
-    );
-  }
-});
 
 //Add a pokemon:
 pokemonRepository.add({
@@ -78,10 +84,31 @@ pokemonRepository.add({
 console.log("Updated repository", pokemonRepository.getAll());
 //"Updated repository" gives a name in the console to the new Array.
 
-//Filter based on the length of the pokemon name
+// forEach loop: To access the pokemonList one has to use the getAll() function:
+pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.addListItem(pokemon);
+});
 
+//Filter based on the length of the pokemon name
 const result = pokemonRepository
   .getAll()
   .filter((pokemon) => pokemon.name.length >= 7);
 
 console.log(result);
+
+//Filter to search Pokemon pokemon name
+function searchPokemon(pokemonArray, pokemonName) {
+  const filteredPokemon = pokemonArray.filter(
+    (pokemon) => pokemon.name === pokemonName
+  );
+  return filteredPokemon;
+}
+
+const pokemonArray = [
+  { name: "Pikachu", type: "Electric" },
+  { name: "Charizard", type: "Fire" },
+  { name: "Bulbasaur", type: "Grass" },
+];
+
+const searchResult = searchPokemon(pokemonArray, "Pikachu");
+console.log(searchResult);
