@@ -91,7 +91,6 @@ pokemonRepository.getAll().forEach(function (pokemon) {
   pokemonRepository.addListItem(pokemon);
 });
 
-//Filter based on the length of the pokemon name
 //Filter with Arrow function based on the length of the pokemon name
 
 const result = pokemonRepository
