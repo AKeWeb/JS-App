@@ -55,11 +55,13 @@ let pokemonRepository = (function () {
     button.innerText = pokemon.name;
     button.classList.add("pokemonButton");
     listItem.classList.add("listItem");
+    //Appendes the created elements to its parent
     listItem.appendChild(button);
     pokemonList.appendChild(listItem);
     //This function is called an event handler.
-    button.addEventListener("click", function (pokemon) {
+    button.addEventListener("click", function () {
       console.log(button.innerText);
+      // Arrow function: button.addEventListener("click", () => { console.log(button.innerText); });
     });
   }
 
@@ -96,19 +98,13 @@ const result = pokemonRepository
 
 console.log(result);
 
-//Filter to search Pokemon pokemon name
-function searchPokemon(pokemonArray, pokemonName) {
-  const filteredPokemon = pokemonArray.filter(
+//Filter to search Pokemon pokemon name:
+function searchPokemon(pokemonRepository, pokemonName) {
+  const filteredPokemon = pokemonRepository.filter(
     (pokemon) => pokemon.name === pokemonName
   );
   return filteredPokemon;
 }
 
-const pokemonArray = [
-  { name: "Pikachu", type: "Electric" },
-  { name: "Charizard", type: "Fire" },
-  { name: "Bulbasaur", type: "Grass" },
-];
-
-const searchResult = searchPokemon(pokemonArray, "Pikachu");
+const searchResult = searchPokemon(pokemonRepository, "Butterfree");
 console.log(searchResult);
