@@ -1,0 +1,26 @@
+*,
+*::after,
+*::befor {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.titel {
+    margin: 5px;
+    text-align: center;
+    padding: 1em;
+}
+
+.listItem {
+    list-style: none;
+}
+
+.pokemonButton {
+    border-radius: 5%;
+    padding: 3em;
+    border: solid;
+    background-color: aliceblue;
+    margin: 5px;
+    width: 200px;
+}

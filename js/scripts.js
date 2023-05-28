@@ -47,27 +47,35 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+  //Function to add Pokemons with DOM
+  function addListItem(pokemon) {
+    let pokemonList = document.querySelector(".pokemon-list");
+    let listItem = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("pokemonButton");
+    listItem.classList.add("listItem");
+    //Appendes the created elements to its parent
+    listItem.appendChild(button);
+    pokemonList.appendChild(listItem);
+    //This function is called an event handler.
+    button.addEventListener("click", function () {
+      console.log(button.innerText);
+      // Arrow function: button.addEventListener("click", () => { console.log(button.innerText); });
+    });
+  }
+
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+
   //Results accessble from outside the function
   return {
     add: add,
     getAll: getAll,
+    addListItem: addListItem,
   };
 })();
-
-// forEach loop: To access the pokemonList one has to use the getAll() function (return):
-pokemonRepository.getAll().forEach(function (pokemon) {
-  if (pokemon.height > 4) {
-    document.write(
-      `<p>${pokemon.name} (height: ${pokemon.height}), ...wow that is a big one!`
-    );
-  } else if (pokemon.height < 4 && pokemon.height > 2) {
-    document.write(`<p>${pokemon.name} (height: ${pokemon.height})`);
-  } else {
-    document.write(
-      `<p>${pokemon.name} (height: ${pokemon.height}), that is the smallest one!`
-    );
-  }
-});
 
 //Add a pokemon:
 pokemonRepository.add({
@@ -78,6 +86,12 @@ pokemonRepository.add({
 console.log("Updated repository", pokemonRepository.getAll());
 //"Updated repository" gives a name in the console to the new Array.
 
+// forEach loop: To access the pokemonList one has to use the getAll() function:
+pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.addListItem(pokemon);
+});
+
+//Filter based on the length of the pokemon name
 //Filter with Arrow function based on the length of the pokemon name
 
 const result = pokemonRepository
@@ -85,3 +99,14 @@ const result = pokemonRepository
   .filter((pokemon) => pokemon.name.length >= 7);
 
 console.log(result);
+
+//Filter to search Pokemon pokemon name:
+function searchPokemon(pokemonRepository, pokemonName) {
+  const filteredPokemon = pokemonRepository.filter(
+    (pokemon) => pokemon.name === pokemonName
+  );
+  return filteredPokemon;
+}
+
+const searchResult = searchPokemon(pokemonRepository, "Butterfree");
+console.log(searchResult);
