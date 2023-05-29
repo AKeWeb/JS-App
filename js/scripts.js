@@ -1,40 +1,19 @@
 //IIFE Function:
 let pokemonRepository = (function () {
   // Creating Pokemon Objects:
-  let pokemon1 = {
-    name: "Butterfree",
-    height: 5,
-    type: ["poision", "grass"],
-  };
-
-  let pokemon2 = {
-    name: "Weedle",
-    height: 3,
-    type: ["rock", "fire"],
-  };
-
-  let pokemon3 = {
-    name: "Rattata",
-    height: 1,
-    type: ["ice", "water"],
-  };
-
-  // Including Pokemon Objects into Pokemon List (Array):
-  let pokemonList = [pokemon1, pokemon2, pokemon3];
-  console.log(pokemonList);
+  let pokemonList = [];
+  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
   //Function to push (add) new pokemon the pokemonList, making sure it is an objective and has a name, height and type key and the right "structure" through a new varible let newPokemon:
   function add(pokemon) {
     if (
       typeof pokemon === "object" &&
       "name" in pokemon &&
-      "height" in pokemon &&
-      "type" in pokemon
+      "detailsUrl" in pokemon
     ) {
       let newPokemon = {
         name: pokemon.name,
-        height: pokemon.height,
-        type: pokemon.type,
+        detailsUrl: pokemon.detailsUrl,
       };
       pokemonList.push(newPokemon);
     } else {
@@ -59,14 +38,54 @@ let pokemonRepository = (function () {
     listItem.appendChild(button);
     pokemonList.appendChild(listItem);
     //This function is called an event handler.
-    button.addEventListener("click", function () {
-      console.log(button.innerText);
-      // Arrow function: button.addEventListener("click", () => { console.log(button.innerText); });
+    button.addEventListener("click", function (event) {
+      showDetails(pokemon);
+      // Arrow function: button.addEventListener("click", () => { showDetails(pokemon)); });
     });
   }
 
+  function loadList() {
+    return fetch(apiUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        //json.results comes form the data of the api key (that is how the result is presented in the api - see in the url link)
+        json.results.forEach(function (item) {
+          let pokemon = {
+            //Comes as well from the structure of the data in the API
+            name: item.name,
+            detailsUrl: item.url,
+          };
+          add(pokemon);
+        });
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
+  }
+
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (details) {
+        // details (parameter of the this function).sprites.front_default (as named in the api data)
+        item.imageUrl = details.sprites.front_default;
+        item.heigt = details.height;
+        item.type = details.types;
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
+  }
+
   function showDetails(pokemon) {
-    console.log(pokemon);
+    loadDetails(pokemon).then(function () {
+      console.log(pokemon);
+    });
   }
 
   //Results accessble from outside the function
@@ -74,21 +93,16 @@ let pokemonRepository = (function () {
     add: add,
     getAll: getAll,
     addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails: showDetails,
   };
 })();
 
-//Add a pokemon:
-pokemonRepository.add({
-  name: "Ekans",
-  height: 1,
-  type: ["ice", "water"],
-});
-console.log("Updated repository", pokemonRepository.getAll());
-//"Updated repository" gives a name in the console to the new Array.
-
-// forEach loop: To access the pokemonList one has to use the getAll() function:
-pokemonRepository.getAll().forEach(function (pokemon) {
-  pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function () {
+  pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
 
 //Filter based on the length of the pokemon name
