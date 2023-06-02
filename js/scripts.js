@@ -82,9 +82,9 @@ let pokemonRepository = (function () {
       });
   }
 
-  let modalContainer = document.querySelector(".modal-container");
+  let modalContainer = document.querySelector("#modal-container");
 
-  function showModal(name, height, type, img) {
+  function showModal(name, height, type, image) {
     modalContainer.innerHTML = "";
 
     let modal = document.createElement("div");
@@ -106,7 +106,7 @@ let pokemonRepository = (function () {
 
     let imageElement = document.createElement("img");
     imageElement.classList.add("image-pokemon");
-    imageElement.setAttribute("src", img);
+    imageElement.setAttribute("src", image);
     imageElement.setAttribute("width", "150");
     imageElement.setAttribute("height", "150");
     imageElement.setAttribute("alt", "Pokemon image");
@@ -142,7 +142,7 @@ let pokemonRepository = (function () {
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-      showModal(pokemon.name, pokemon.height, pokemon.type, pokemon.imgUrl);
+      showModal(pokemon.name, pokemon.height, pokemon.type, pokemon.imageUrl);
     });
   }
 
@@ -165,14 +165,13 @@ pokemonRepository.loadList().then(function () {
 
 //Filter based on the length of the pokemon name
 //Filter with Arrow function based on the length of the pokemon name
-
+/*
 const result = pokemonRepository
   .getAll()
   .filter((pokemon) => pokemon.name.length >= 7);
 
 console.log(result);
 
-/*
 //Filter to search Pokemon pokemon name:
 function searchPokemon(pokemonRepository, pokemonName) {
   const filteredPokemon = pokemonRepository.filter(
