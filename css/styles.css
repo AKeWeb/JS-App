@@ -41,6 +41,7 @@
     overflow: auto;
     display: grid;
     text-align: center;
+    border-radius: 5%;
 }
 
 .modal {
@@ -51,6 +52,7 @@
     width: 100%;
     max-width: 500px;
     text-align: center;
+    border-radius: 5%;
 }
 
 .modal-close {
@@ -60,6 +62,8 @@
     background: none;
     color: gray;
     text-decoration: underline;
+    margin-right: 30px;
+    margin-top: 10px
 }
 
 .modal h1 {

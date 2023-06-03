@@ -100,13 +100,13 @@ let pokemonRepository = (function () {
     nameElement.innerText = "Pokemon Name: " + name;
 
     let heightElement = document.createElement("p");
-    heightElement.innerText = "Height: " + height;
+    heightElement.innerText = "Height: " + height + " cm";
 
     let weightElement = document.createElement("p");
-    weightElement.innerText = "Height: " + weight;
+    weightElement.innerText = "Height: " + weight + " kg";
 
     let typeElement = document.createElement("p");
-    typeElement.innerText = "Types: " + type;
+    typeElement.innerText = "Type: " + type;
 
     let imageElement = document.createElement("img");
     imageElement.classList.add("image-pokemon");
@@ -151,7 +151,7 @@ let pokemonRepository = (function () {
         pokemon.name,
         pokemon.height,
         pokemon.weight,
-        pokemon.type,
+        pokemon.type[0].type.name,
         pokemon.imageUrl
       );
     });
