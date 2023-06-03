@@ -32,8 +32,8 @@
 #modal-container.is-visible {
     position: fixed;
     padding: 20px;
-    top: 10px;
-    left: 10px;
+    top: 150px;
+    left: 400px;
     width: 50%;
     height: 50%;
     background: rgb(185, 181, 181);
