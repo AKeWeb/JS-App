@@ -75,6 +75,7 @@ let pokemonRepository = (function () {
         // details (parameter of the this function).sprites.front_default (as named in the api data)
         item.imageUrl = details.sprites.front_default;
         item.height = details.height;
+        item.weight = details.weight;
         item.type = details.types;
       })
       .catch(function (e) {
@@ -84,7 +85,7 @@ let pokemonRepository = (function () {
 
   let modalContainer = document.querySelector("#modal-container");
 
-  function showModal(name, height, type, image) {
+  function showModal(name, height, weight, type, image) {
     modalContainer.innerHTML = "";
 
     let modal = document.createElement("div");
@@ -96,13 +97,16 @@ let pokemonRepository = (function () {
     closeButtonElement.addEventListener("click", hideModal);
 
     let nameElement = document.createElement("h1");
-    nameElement.innerText = name;
+    nameElement.innerText = "Pokemon Name: " + name;
 
     let heightElement = document.createElement("p");
-    heightElement.innerText = height;
+    heightElement.innerText = "Height: " + height;
+
+    let weightElement = document.createElement("p");
+    weightElement.innerText = "Height: " + weight;
 
     let typeElement = document.createElement("p");
-    typeElement.innerText = type;
+    typeElement.innerText = "Types: " + type;
 
     let imageElement = document.createElement("img");
     imageElement.classList.add("image-pokemon");
@@ -114,6 +118,7 @@ let pokemonRepository = (function () {
     modal.appendChild(closeButtonElement);
     modal.appendChild(nameElement);
     modal.appendChild(heightElement);
+    modal.appendChild(weightElement);
     modal.appendChild(typeElement);
     modal.appendChild(imageElement);
     modalContainer.appendChild(modal);
@@ -142,7 +147,13 @@ let pokemonRepository = (function () {
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-      showModal(pokemon.name, pokemon.height, pokemon.type, pokemon.imageUrl);
+      showModal(
+        pokemon.name,
+        pokemon.height,
+        pokemon.weight,
+        pokemon.type,
+        pokemon.imageUrl
+      );
     });
   }
 
