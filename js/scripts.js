@@ -105,8 +105,11 @@ let pokemonRepository = (function () {
     let weightElement = document.createElement("p");
     weightElement.innerText = "Height: " + weight + " kg";
 
+    let types = [];
+    type.forEach((element) => types.push(element.type.name));
+
     let typeElement = document.createElement("p");
-    typeElement.innerText = "Type: " + type;
+    typeElement.innerText = "Types: " + types.join(", ");
 
     let imageElement = document.createElement("img");
     imageElement.classList.add("image-pokemon");
@@ -151,7 +154,7 @@ let pokemonRepository = (function () {
         pokemon.name,
         pokemon.height,
         pokemon.weight,
-        pokemon.type[0].type.name,
+        pokemon.type,
         pokemon.imageUrl
       );
     });
