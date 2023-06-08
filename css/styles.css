@@ -1,9 +1,19 @@
+/*
 *,
 *::after,
 *::befor {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+*/
+body {
+    margin-top: 60px;
+    background-color: aliceblue
+}
+
+.logo {
+    margin: 2px 0 2px 20px;
 }
 
 .titel {
@@ -12,19 +22,43 @@
     padding: 1em;
 }
 
+.pokemon-list {
+    margin-left: 100px;
+}
+
+.list-group-item {
+    margin-bottom: 10px;
+}
+
+/*
 .listItem {
     list-style: none;
 }
-
+*/
 .pokemonButton {
-    border-radius: 5%;
-    padding: 3em;
-    border: solid;
-    background-color: aliceblue;
-    margin: 5px;
-    width: 200px;
+    border-radius: 2%;
+    padding: 1em;
+    border: solid 1px;
+    background-color: rgb(164, 203, 237);
 }
 
+.pokemonButton::first-letter {
+    text-transform: capitalize;
+}
+
+h1::first-letter {
+    text-transform: capitalize;
+}
+
+p::first-letter {
+    text-transform: capitalize;
+}
+
+.modal-header {
+    background-color: aliceblue;
+}
+
+/*
 #modal-container {
     display: none;
 }
@@ -35,8 +69,8 @@
     top: 150px;
     left: 400px;
     width: 50%;
-    height: 50%;
-    background: rgb(185, 181, 181);
+    height: auto;
+    background: rgb(169, 171, 168);
     z-index: 999;
     overflow: auto;
     display: grid;
@@ -45,7 +79,7 @@
 }
 
 .modal {
-    margin: auto;
+    margin-top: 100px;
     display: inline-block;
     background: aliceblue;
     padding: 15p;
